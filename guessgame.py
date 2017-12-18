@@ -23,9 +23,12 @@ def game(message):
 def guessing (message):
     user_id = message.chat.id
 
-    if int(message.text) == numbers[user_id]:
-        bot.send_message(user_id, "Ты угадал число, молодец! Если хочешь играть ещё напиши /game")
-    else:
-        bot.send_message(user_id, "Ты не угадал, или написал текст вместо числа, попробуй ещё. Если ты не знаешь, что делать, напиши /help")
+    try:
+        if int(message.text) == numbers[user_id]:
+            bot.send_message(user_id, "Ты угадал число, молодец! Если хочешь играть ещё напиши /game")
+        else:
+            bot.send_message(user_id, "Ты не угадал, попробуй ещё. Если ты не знаешь, что делать, напиши /help")
+    except:   bot.send_message(user_id, "Ты отправил текстовое сообщение, Напиши число цифрами или, если ты не знаешь что делать напиши /help")
+
 # поллинг - вечный цикл с обновлением входящих сообщений
 bot.polling(none_stop=True)
